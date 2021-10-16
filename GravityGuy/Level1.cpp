@@ -200,6 +200,7 @@ void Level1::Update()
 	}
 	else if (Mabel::player->Level() == 1 || window->KeyPress('N'))
 	{
+		Mabel::totalScore += Mabel::player->score;
 		Mabel::NextLevel<Level2>();
 		Mabel::player->Reset();
 
@@ -230,7 +231,8 @@ void Level1::Draw()
 	text<< "Score: " << Mabel::player->score;
 
 	int length = int(text.tellp());
-	gameFont->Draw(window->Width() - (30.0f * length), 50.0f, text.str(), Color(0, 0, 0, 1));
+	gameFont->Draw(1050.0f, 35.0f, "Level 1/2", Color(0, 0, 0, 1));
+	gameFont->Draw(window->Width() - (30.0f * length), 75.0f, text.str(), Color(0, 0, 0, 1));
 
 
 	gameFont->Draw(200.0f, 660.0f, "Use Left and Righ to move horizontal and space to jump", Color(1, 1, 1, 1), Layer::FRONT, 0.75f);

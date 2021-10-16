@@ -24,6 +24,8 @@ bool    Mabel::viewBBox = false;
 
 Scene* Mabel::scene = nullptr;
 
+uint Mabel::totalScore = 0;
+
 // ------------------------------------------------------------------------------
 
 void Mabel::Init() 
@@ -42,6 +44,8 @@ void Mabel::Init()
 
     // cria jogador
     player = new Player();
+
+    totalScore = 0;
 
     // inicializa nível de abertura do jogo
     level = new Home();

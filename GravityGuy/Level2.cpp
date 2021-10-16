@@ -163,6 +163,7 @@ void Level2::Update()
 {
 	if (window->KeyPress(VK_ESCAPE) || Mabel::player->Level() == 2 || window->KeyPress('N'))
 	{
+		Mabel::totalScore += Mabel::player->score;
 		Mabel::audio->Stop(MUSIC);
 		Mabel::NextLevel<Home>();
 		Mabel::player->Reset();

@@ -38,6 +38,7 @@ public:
 
     static Scene* scene;
     
+    static uint totalScore;
 
     void Init();                    // inicializa jogo
     void Update();                  // atualiza lógica do jogo

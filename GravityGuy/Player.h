@@ -22,7 +22,7 @@
 // ------------------------------------------------------------------------------
 
 #include "Timer.h"
-enum Gravity {NORMAL,INVERTED,BACK};         // tipo da gravidade
+enum Gravity {NORMAL,STOPPED,BACK};         // tipo da gravidade
 
 // ---------------------------------------------------------------------------------
 

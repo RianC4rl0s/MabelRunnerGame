@@ -29,14 +29,14 @@ Player::Player()
 	uint back[4] = { 11,10,9,8 };
 	uint normal[4] = { 0,1,2,3 };
 
-	anim->Add(INVERTED, invert, 4);
+	anim->Add(STOPPED, invert, 4);
 	anim->Add(NORMAL, normal, 4);
 	anim->Add(BACK, back, 4);
 	// cria bounding box
 	BBox(new Rect(
-		-1.0f * tileset->TileWidth() / 2.0f + 10.0f,
+		-1.0f * tileset->TileWidth() / 2.0f + 20.0f,
 		-1.0f * tileset->TileHeight() / 2.0f,
-		tileset->TileWidth() / 2.0f -10.0f ,
+		tileset->TileWidth() / 2.0f - 20.0f,
 		tileset->TileHeight() / 2.0f));
 
 	// inicializa estado do player
@@ -117,8 +117,9 @@ void Player::OnCollision(Object* obj)
 		Rect* platBb = (Rect*)plat->BBox();
 		Rect* playerBb = (Rect*)BBox();
 
-
-		//Colide em cima
+		//verifica se esta dentro do objeto
+		//if (playerBb->Right() > platBb->Left() && playerBb->Left()< platBb->Right()) {
+			//Colide em cima
 		if (platBb->Top() <= playerBb->Bottom() && platBb->Bottom() > playerBb->Bottom()) {
 			if (playerBb->Right() > platBb->Left() && playerBb->Left() < platBb->Right()) {
 
@@ -128,26 +129,19 @@ void Player::OnCollision(Object* obj)
 				MoveTo(x, obj->Y() - 90);
 				isOnGround = true;
 
-				// ----------------------------------------------------------
-				// Processa teclas pressionadas
-				// ----------------------------------------------------------
-				// jogador só pode alterar a gravidade enquanto estiver
-				// em cima de uma plataforma, não é possível a mudança no ar
-				// ----------------------------------------------------------
-				//speedY = 0;
-
 				if (isOnGround && window->KeyDown(VK_SPACE))
 				{
 
 					//gravity = -gravity;
 					jumpForce = initialJumpForce;
-
+					isOnGround = false;
 					Mabel::audio->Play(TRANSITION);
 
 				}
 			}
 		}
 		else if (platBb->Bottom() > playerBb->Top() && platBb->Top() < playerBb->Top()) {//colide em baixo
+			
 			if (playerBb->Right() > platBb->Left() && playerBb->Left() < platBb->Right()) {
 				MoveTo(x, obj->Y() + 96);
 				airTime = 0;
@@ -155,21 +149,24 @@ void Player::OnCollision(Object* obj)
 				jumpForce = 0;
 			}
 		}
-		else if (platBb->Right() > playerBb->Left() && platBb->Right() < playerBb->Right()) {
-			//bateu na esquerda
-			if ((platBb->Bottom() <platBb->Bottom() && platBb->Bottom() > platBb->Top()) || (playerBb->Top() > platBb->Top()&& playerBb->Top() < platBb->Bottom())|| (platBb->Bottom() > platBb->Bottom() || playerBb->Top() < platBb->Top())) {
+		else {
+			
+			if (platBb->Right() > playerBb->Left() && platBb->Right() < playerBb->Right()) {
+				//bateu na esquerda
+				if ((platBb->Bottom() < platBb->Bottom() && platBb->Bottom() > platBb->Top())) {
 
-				MoveTo(platBb->Right() + tileset->TileWidth() / 2, y);
+					MoveTo(platBb->Right() + tileset->TileWidth() / 2, y);
+				}
+
 			}
+			else if (platBb->Left() < playerBb->Right() && platBb->Left() > playerBb->Left()) {
+				//if ((platBb->Bottom() <platBb->Bottom() && platBb->Bottom() > platBb->Top()) || (playerBb->Top() > platBb->Top()&& playerBb->Top() < platBb->Bottom())) {
+				if (platBb->Bottom() > platBb->Bottom() || playerBb->Top() < platBb->Top()) {
+					MoveTo(platBb->Left() - tileset->TileWidth() / 2, y);
+					//colisao a direita
 
-		}
-		else if (platBb->Left() < playerBb->Right() && platBb->Left() > playerBb->Left()) {
-			//if ((platBb->Bottom() <platBb->Bottom() && platBb->Bottom() > platBb->Top()) || (playerBb->Top() > platBb->Top()&& playerBb->Top() < platBb->Bottom())) {
-			if (platBb->Bottom() > platBb->Bottom() || playerBb->Top() < platBb->Top()) {
-				MoveTo(platBb->Left() - tileset->TileWidth() / 2, y);
-				//colisao a direita
 
-				
+				}
 			}
 		}
 
@@ -179,16 +176,16 @@ void Player::OnCollision(Object* obj)
 	}
 
 	if (obj->Type() == NORMAL_THORN) {
-		Reset();
-		die = true;
-		
+		//Reset();
+		//die = true;
+
 	}
 
 	if (obj->Type() == NORMAL_FOOD) {
 		score += 10;
-		Mabel::scene->Delete(obj, STATIC); 
+		Mabel::scene->Delete(obj, STATIC);
 		//GravityGuy::audio->Play(SCORE_POINT);
-		
+
 	}
 }
 
@@ -209,7 +206,7 @@ void Player::Update()
 	airTime += gameTime;
 	/*if (gravitySpeed < 500) {//velociade terminal
 	}*/
-
+	
 	gravitySpeed = gravity * 200 * airTime;
 
 
@@ -230,14 +227,16 @@ void Player::Update()
 			Translate(400 * gameTime, 0);
 			anim->Select(NORMAL);
 		}
-		else {
+		else  {
 			Translate(-300 * gameTime, 0);
-			if((X() - tileset->TileWidth()) / 2  + 10>= 0)
-			anim->Select(INVERTED);
+			if ((X() - tileset->TileWidth()) / 2 + 10 >= 0) {
+
+				anim->Select(STOPPED);
+			}
 		}
 
 	}
-	if ((X() - tileset->TileWidth()) / 2 <= 0) {
+	if ((X() - tileset->TileWidth()) / 2 <= 1.0f) {
 		MoveTo(1.0f + (float)tileset->TileWidth(), y);
 		anim->Select(NORMAL);
 	}
@@ -250,7 +249,7 @@ void Player::Update()
 
 	if (timer.Elapsed(0.5f))
 	{
-		score = score +1;
+		score = score + 1;
 		timer.Reset();
 	}
 
