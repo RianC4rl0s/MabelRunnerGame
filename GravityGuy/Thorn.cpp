@@ -14,6 +14,7 @@ Thorn::Thorn(float posX, float posY, Color tint) : color(tint) {
 }	
 Thorn::~Thorn() {
 	delete thorn;
+	
 }
 
 void Thorn::Update() {

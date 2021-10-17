@@ -15,6 +15,7 @@
 #include "Thorn.h"
 #include "Food.h"
 #include "GameOver.h"
+#include "Bird.h"
 // ---------------------------------------------------------------------------------
 
 Player::Player()
@@ -141,7 +142,7 @@ void Player::OnCollision(Object* obj)
 			}
 		}
 		else if (platBb->Bottom() > playerBb->Top() && platBb->Top() < playerBb->Top()) {//colide em baixo
-			
+
 			if (playerBb->Right() > platBb->Left() && playerBb->Left() < platBb->Right()) {
 				MoveTo(x, obj->Y() + 96);
 				airTime = 0;
@@ -150,19 +151,19 @@ void Player::OnCollision(Object* obj)
 			}
 		}
 		else {
-			
+
 			if (platBb->Right() > playerBb->Left() && platBb->Right() < playerBb->Right()) {
 				//bateu na esquerda
 				if ((platBb->Bottom() < platBb->Bottom() && platBb->Bottom() > platBb->Top())) {
 
-					MoveTo(platBb->Right() + tileset->TileWidth() / 2, y);
+					MoveTo(platBb->Right() + tileset->TileWidth() / 2 - 20.0f, y);
 				}
 
 			}
 			else if (platBb->Left() < playerBb->Right() && platBb->Left() > playerBb->Left()) {
 				//if ((platBb->Bottom() <platBb->Bottom() && platBb->Bottom() > platBb->Top()) || (playerBb->Top() > platBb->Top()&& playerBb->Top() < platBb->Bottom())) {
 				if (platBb->Bottom() > platBb->Bottom() || playerBb->Top() < platBb->Top()) {
-					MoveTo(platBb->Left() - tileset->TileWidth() / 2, y);
+					MoveTo(platBb->Left() - tileset->TileWidth() / 2 +20.0f, y);
 					//colisao a direita
 
 
@@ -175,10 +176,21 @@ void Player::OnCollision(Object* obj)
 
 	}
 
-	if (obj->Type() == NORMAL_THORN) {
-		//Reset();
-		//die = true;
-
+	if (obj->Type() == NORMAL_THORN ) {
+		Mabel::totalScore += score;
+		if (Mabel::totalScore > Mabel::highScore) {
+			Mabel::highScore = Mabel::totalScore;
+		}
+		Reset();
+		die = true;
+	}
+	if (obj->Type() == NORMAL_BIRD ) {
+		Mabel::totalScore += score;
+		if (Mabel::totalScore > Mabel::highScore) {
+			Mabel::highScore = Mabel::totalScore;
+		}
+		Reset();
+		die = true;
 	}
 
 	if (obj->Type() == NORMAL_FOOD) {
@@ -206,7 +218,7 @@ void Player::Update()
 	airTime += gameTime;
 	/*if (gravitySpeed < 500) {//velociade terminal
 	}*/
-	
+
 	gravitySpeed = gravity * 200 * airTime;
 
 
@@ -221,13 +233,19 @@ void Player::Update()
 
 		if (window->KeyDown(VK_LEFT)) {
 			Translate(-400 * gameTime, 0);
+
+
 			anim->Select(BACK);
+
 		}
 		else if (window->KeyDown(VK_RIGHT)) {
 			Translate(400 * gameTime, 0);
+
+
 			anim->Select(NORMAL);
+
 		}
-		else  {
+		else {
 			Translate(-300 * gameTime, 0);
 			if ((X() - tileset->TileWidth()) / 2 + 10 >= 0) {
 
@@ -252,7 +270,7 @@ void Player::Update()
 		score = score + 1;
 		timer.Reset();
 	}
-
+	
 	Translate(direction->X() * gameTime, direction->Y() * gameTime);
 }
 

@@ -25,7 +25,7 @@ bool    Mabel::viewBBox = false;
 Scene* Mabel::scene = nullptr;
 
 uint Mabel::totalScore = 0;
-
+uint Mabel::highScore = 0;
 // ------------------------------------------------------------------------------
 
 void Mabel::Init() 
@@ -46,6 +46,7 @@ void Mabel::Init()
     player = new Player();
 
     totalScore = 0;
+    highScore = 0;
 
     // inicializa nível de abertura do jogo
     level = new Home();
@@ -63,6 +64,7 @@ void Mabel::Update()
   
     // atualiza nível
     level->Update();
+
 } 
 
 // ------------------------------------------------------------------------------

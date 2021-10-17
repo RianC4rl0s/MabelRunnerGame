@@ -21,6 +21,7 @@
 #include <fstream>
 #include "Thorn.h"
 #include"Food.h"
+#include "Bird.h"
 #include "Decoration.h"
 using std::ifstream;
 using std::string;
@@ -86,8 +87,8 @@ void Level2::Init()
 
 	sysFont = new Font("Resources/Ms Sans Serif PIXEL 44.png");
 	sysFont->Spacing("Resources/Ms Sans Serif pixel 44.dat");
-	gameFont = new Font("Resources/ms_sans_serif_36.png");
-	gameFont->Spacing("Resources/ms_sans_serif_36.dat");
+	gameFont = new Font("Resources/ink-free32.png");
+	gameFont->Spacing("Resources/ink-free32.dat");
 
 
 	Food* food;
@@ -119,6 +120,7 @@ void Level2::Init()
 
 
 	Thorn* thorn;
+	Bird* bird;
 
 	int obsType = 0;
 	fin.open("Level2Obstacles.txt");
@@ -134,6 +136,10 @@ void Level2::Init()
 				thorn = new Thorn(posX, posY, Color(1, .6f, .6f, 1));
 				scene->Add(thorn, STATIC);
 
+			}
+			else if (obsType == 1) {
+				bird = new Bird(posX, posY, Color(1, .6f, .6f, 1));
+				scene->Add(bird, STATIC);
 			}
 
 		}
@@ -164,12 +170,26 @@ void Level2::Update()
 	if (window->KeyPress(VK_ESCAPE) || Mabel::player->Level() == 2 || window->KeyPress('N'))
 	{
 		Mabel::totalScore += Mabel::player->score;
+		if (Mabel::totalScore > Mabel::highScore) {
+			Mabel::highScore = Mabel::totalScore;
+		}
+		Mabel::totalScore += Mabel::player->score;
 		Mabel::audio->Stop(MUSIC);
 		Mabel::NextLevel<Home>();
 		Mabel::player->Reset();
 	}
-	else if (Mabel::player->Bottom() < 0 || Mabel::player->Top() > window->Height())
+	/*else if (Mabel::player->Bottom() < 0 || Mabel::player->Top() > window->Height())
 	{
+		Mabel::audio->Stop(MUSIC);
+		Mabel::NextLevel<GameOver>();
+		Mabel::player->Reset();
+	}*/
+	else if (Mabel::player->Top() > window->Height())
+	{
+		Mabel::totalScore += Mabel::player->score;
+		if (Mabel::totalScore > Mabel::highScore) {
+			Mabel::highScore = Mabel::totalScore;
+		}
 		Mabel::audio->Stop(MUSIC);
 		Mabel::NextLevel<GameOver>();
 		Mabel::player->Reset();
@@ -198,10 +218,11 @@ void Level2::Draw()
 	text << "Score: " << Mabel::player->score;
 
 	int length = int(text.tellp());
-	gameFont->Draw(window->Width() - (30.0f * length), 50.0f, text.str(), Color(0, 0, 0, 1));
+	gameFont->Draw(window->Width() - (30.0f * length), 70.0f, text.str(), Color(1, 1, 1, 1));
+	gameFont->Draw(window->Width() - 200.0f, 35.0f, "Level 2/2", Color(1, 1, 1, 1));
 
 
-	gameFont->Draw(200.0f, 660.0f, "Use Left and Righ to move horizontal and space to jump", Color(1, 1, 1, 1), Layer::FRONT, 0.75f);
+	gameFont->Draw(200.0f, 660.0f, "Use Left and Righ to move horizontal. Space to jump", Color(1, 1, 1, 1), Layer::FRONT, 0.75f);
 
 
 	if (Mabel::viewBBox)

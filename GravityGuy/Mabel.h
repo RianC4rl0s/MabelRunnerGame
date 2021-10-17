@@ -26,6 +26,7 @@ enum Sounds {MENU, MUSIC, TRANSITION, SCORE_POINT};
 
 // ------------------------------------------------------------------------------
 
+using std::stringstream;
 class Mabel : public Game
 {
 private:
@@ -39,6 +40,8 @@ public:
     static Scene* scene;
     
     static uint totalScore;
+    static uint highScore;
+
 
     void Init();                    // inicializa jogo
     void Update();                  // atualiza lógica do jogo

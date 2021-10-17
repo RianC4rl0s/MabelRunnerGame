@@ -1,16 +1,6 @@
-/**********************************************************************************
-// GameOver (Arquivo de Cabeçalho)
-// 
-// Criação:     14 Fev 2013
-// Atualização: 27 Set 2021
-// Compilador:  Visual C++ 2019
-//
-// Descrição:   Fim do jogo
-//              
-**********************************************************************************/
 
-#ifndef _GRAVITYGUY_GAMEOVER_H_
-#define _GRAVITYGUY_GAMEOVER_H_
+#ifndef GAMEOVER_H_
+#define GAMEOVER_H_
 
 // ------------------------------------------------------------------------------
 
@@ -18,9 +8,11 @@
 #include "Sprite.h"
 #include "Animation.h"
 #include "TileSet.h"
-
+#include "Font.h"
+#include <sstream>
 // ------------------------------------------------------------------------------
 
+using std::stringstream;
 class GameOver : public Game
 {
 private:
@@ -32,7 +24,13 @@ private:
     
     Animation* anim2 = nullptr;     // animação do menu
 
+    Font* gameFont = nullptr;              // fonte do jogo
+
+    stringstream text;
+
+
 public:
+    //uint totalScore = 0;
     void Init();                    // inicialização do nível
     void Update();                  // lógica da tela de fim
     void Draw();                    // desenho da tela

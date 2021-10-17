@@ -27,6 +27,11 @@ void Home::Init()
     Mabel::audio->Play(MENU, true);
 
     title = new Sprite("Resources/MabelTitulo.png");
+
+
+    gameFont = new Font("Resources/ink-free32.png");
+    gameFont->Spacing("Resources/ink-free32.dat");
+
 }
 
 // ------------------------------------------------------------------------------
@@ -61,6 +66,14 @@ void Home::Draw()
     anim2->Draw(window->CenterX(), 325);
 
     title->Draw(window->CenterX(), 200.0f, Layer::FRONT);
+
+    text.str("");
+    //text << "1000";
+    text << "High Score: " << Mabel::highScore;
+
+    int length = int(text.tellp());
+    gameFont->Draw(window->CenterX() - (length * 16.0f) / 2, 600.0f, text.str(), Color(1, 1, 1, .65f));
+
 }
 
 // ------------------------------------------------------------------------------
@@ -75,6 +88,7 @@ void Home::Finalize()
     delete background;
     delete playerSprite;
     delete title;
+    delete gameFont;
 }
 
 // ------------------------------------------------------------------------------

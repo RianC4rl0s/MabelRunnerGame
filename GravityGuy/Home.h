@@ -1,16 +1,7 @@
-/**********************************************************************************
-// Home (Arquivo de Cabeçalho)
-// 
-// Criação:     14 Fev 2013
-// Atualização: 27 Set 2021
-// Compilador:  Visual C++ 2019
-//
-// Descrição:   Tela de abertura do jogo
-//
-**********************************************************************************/
 
-#ifndef _GRAVITYGUY_HOME_H_
-#define _GRAVITYGUY_HOME_H_
+
+#ifndef HOME_H_
+#define HOME_H_
 
 // ------------------------------------------------------------------------------
 // Inclusões
@@ -21,8 +12,11 @@
 #include "Animation.h"
 
 #include "Background.h"
+#include "Font.h"
+#include <sstream>
 // ------------------------------------------------------------------------------
 
+using std::stringstream;
 class Home : public Game
 {
 private:
@@ -36,6 +30,11 @@ private:
     Sprite* title = nullptr;
     TileSet* playerSprite = nullptr;
     Background* background = nullptr;
+
+    Font* gameFont = nullptr;              // fonte do jogo
+
+    stringstream text;
+
 public:
     void Init();                    // inicia nível
     void Update();                  // atualiza lógica do jogo
