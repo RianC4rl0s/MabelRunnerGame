@@ -33,12 +33,13 @@ void Level1::Init()
 {
 	// cria gerenciador de cena
 	scene = new Scene();
-
+	Mabel::player->Reset();
 	// pano de fundo do jogo
 	backg = new Background(Color{ 1,1,1,1 });
 	scene->Add(backg, STATIC);
 
 	// adiciona jogador na cena
+	
 	scene->Add(Mabel::player, MOVING);
 
 	// ----------------------
@@ -237,7 +238,7 @@ void Level1::Draw()
 	gameFont->Draw(window->Width() - (16.0f * length)-50.0f, 75.0f, text.str(), Color(0, 0, 0, 1));
 
 
-	gameFont->Draw(200.0f, 660.0f, "Use Left and Righ to move horizontal. Space to jump", Color(1, 1, 1, 1), Layer::FRONT, 0.75f);
+	gameFont->Draw(200.0f, 660.0f, "Use Left and Righ to move horizontally. Space to jump", Color(1, 1, 1, 1), Layer::FRONT, 0.75f);
 
 	
 

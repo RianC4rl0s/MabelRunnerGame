@@ -19,6 +19,7 @@ void GameOver::Init()
 	anim2 = new Animation(pressEsc, 0.180f, true);
 
 	dead = new Sprite("Resources/hamsterDead.png");
+	cat = new Sprite("Resources/cat.png");
 
 	gameFont = new Font("Resources/ink-free32.png");
 	gameFont->Spacing("Resources/ink-free32.dat");
@@ -47,7 +48,7 @@ void GameOver::Draw()
 	title->Draw(window->CenterX(), window->CenterY(), Layer::BACK, 1.0F, 0.0F,Color(0.1f,0.1f,0.1f,1));
 	anim2->Draw(window->CenterX(), window->CenterY() - pressEsc->TileHeight() / 2, Layer::FRONT);
 	dead->Draw(window->CenterX(), 200, Layer::FRONT);
-
+	cat->Draw(490.0f, 170.0f, Layer::FRONT);
 
 
 	text.str("");
@@ -68,7 +69,7 @@ void GameOver::Finalize()
 	delete anim2;
 	delete pressEsc;
 	delete dead;
-	
+	delete cat;
 	delete gameFont;
 	
 }

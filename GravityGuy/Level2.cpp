@@ -35,6 +35,7 @@ void Level2::Init()
 	// cria gerenciador de cena
 	scene = new Scene();
 
+	Mabel::player->Reset();
 	// pano de fundo do jogo
 	Color dark{ 0.4f, 0.4f, 0.4f, 1.0f };
 	backg = new Background(dark);
@@ -219,7 +220,7 @@ void Level2::Draw()
 	gameFont->Draw(window->Width() - 200.0f, 35.0f, "Level 2/2", Color(1, 1, 1, 1));
 
 
-	gameFont->Draw(200.0f, 660.0f, "Use Left and Righ to move horizontal. Space to jump", Color(1, 1, 1, 1), Layer::FRONT, 0.75f);
+	gameFont->Draw(200.0f, 660.0f, "Use Left and Righ to move horizontally. Space to jump", Color(1, 1, 1, 1), Layer::FRONT, 0.75f);
 
 
 	if (Mabel::viewBBox)

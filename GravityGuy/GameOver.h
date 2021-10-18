@@ -19,6 +19,7 @@ private:
     Sprite * title = nullptr;       // tela de fim
 
     Sprite* dead = nullptr;
+    Sprite* cat = nullptr;
 
     TileSet* pressEsc = nullptr;    // tileset da animação
     
