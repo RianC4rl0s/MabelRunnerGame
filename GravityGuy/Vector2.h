@@ -1,4 +1,4 @@
-#pragma once
+
 
 #ifndef  VECTOR_2
 #define VECTOR_2

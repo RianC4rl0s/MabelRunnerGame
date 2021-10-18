@@ -1,9 +1,6 @@
 /**********************************************************************************
 // Mabel (Arquivo de Cabeçalho)
-// 
-// Criação:     05 Out 2011
-// Atualização: 27 Set 2021
-// Compilador:  Visual C++ 2019
+
 //
 // Descrição:   Jogo estilo plataforma usando a engine do curso
 //

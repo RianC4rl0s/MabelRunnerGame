@@ -1,6 +1,4 @@
-// Gravity Guy
-// Criação:        14 Fev 2013
-// Atualização:    27 Set 2021
+
 // Descrição:   Posição das plataformas do nível 1
 //
 //

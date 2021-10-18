@@ -1,10 +1,5 @@
 /**********************************************************************************
 // Level1 (Código Fonte)
-//
-// Criação:     14 Fev 2013
-// Atualização: 27 Set 2021
-// Compilador:  Visual C++ 2019
-//
 // Descrição:   Nível 1 do jogo
 //
 **********************************************************************************/
@@ -239,7 +234,7 @@ void Level1::Draw()
 
 	int length = int(text.tellp());
 	gameFont->Draw(window->Width()-200.0f, 35.0f, "Level 1/2", Color(0, 0, 0, 1));
-	gameFont->Draw(window->Width() - (30.0f * length), 75.0f, text.str(), Color(0, 0, 0, 1));
+	gameFont->Draw(window->Width() - (16.0f * length)-50.0f, 75.0f, text.str(), Color(0, 0, 0, 1));
 
 
 	gameFont->Draw(200.0f, 660.0f, "Use Left and Righ to move horizontal. Space to jump", Color(1, 1, 1, 1), Layer::FRONT, 0.75f);

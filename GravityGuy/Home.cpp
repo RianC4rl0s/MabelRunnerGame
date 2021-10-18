@@ -1,9 +1,5 @@
 /**********************************************************************************
 // Home (Código Fonte) 
-// 
-// Criação:     14 Fev 2013
-// Atualização: 27 Set 2021
-// Compilador:  Visual C++ 2019
 //
 // Descrição:   Tela de abertura do jogo
 //

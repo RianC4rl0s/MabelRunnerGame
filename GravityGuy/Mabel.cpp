@@ -1,10 +1,6 @@
 /**********************************************************************************
 // Mabel (Código Fonte)
 // 
-// Criação:     05 Out 2011
-// Atualização: 27 Set 2021
-// Compilador:  Visual C++ 2019
-//
 // Descrição:   Jogo estilo plataforma usando a engine do curso
 //
 **********************************************************************************/
@@ -33,10 +29,9 @@ void Mabel::Init()
     // cria sistema de áudio
     audio = new Audio();
     audio->Add(MENU, "Resources/Bug Catching - Emily A. Sprague.wav");
-    //audio->Add(MUSIC, "Resources/Music.wav");
-    //audio->Add(MUSIC, "Resources/Rainbow Forest - Quincas Moreira teste.wav");
+   
     audio->Add(MUSIC, "Resources/Rainbow Forest - Quincas Moreira.wav");
-   // audio->Add(TRANSITION, "Resources/Transition.wav");
+   
     audio->Add(TRANSITION, "Resources/jump.wav");
     audio->Add(SCORE_POINT, "Resources/eat_sound.wav",3);
     // bounding box não visível

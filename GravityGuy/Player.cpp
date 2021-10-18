@@ -1,10 +1,5 @@
 /**********************************************************************************
 // Player (Código Fonte)
-//
-// Criação:     20 Abr 2012
-// Atualização: 27 Set 2021
-// Compilador:  Visual C++ 2019
-//
 // Descrição:   Define uma classe para o jogador
 //
 **********************************************************************************/
@@ -20,7 +15,7 @@
 
 Player::Player()
 {
-	//tileset = new TileSet("Resources/GravityGuy.png", 32, 48, 5, 10);
+	
 	tileset = new TileSet("Resources/tileseth3.png", 128, 128, 4, 12);
 	//anim = new Animation(tileset, 0.120f, true);
 	anim = new Animation(tileset, 0.1f, true);
@@ -175,7 +170,7 @@ void Player::OnCollision(Object* obj)
 
 
 	}
-
+	
 	if (obj->Type() == NORMAL_THORN ) {
 		Mabel::totalScore += score;
 		if (Mabel::totalScore > Mabel::highScore) {
@@ -192,7 +187,7 @@ void Player::OnCollision(Object* obj)
 		Reset();
 		die = true;
 	}
-
+	
 	if (obj->Type() == NORMAL_FOOD) {
 		score += 10;
 		Mabel::scene->Delete(obj, STATIC);

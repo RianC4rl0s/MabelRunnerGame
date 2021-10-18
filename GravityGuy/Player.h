@@ -1,10 +1,6 @@
 /**********************************************************************************
 // Player (Arquivo de Cabeçalho)
 // 
-// Criação:     20 Abr 2012
-// Atualização: 27 Set 2021
-// Compilador:  Visual C++ 2019
-//
 // Descrição:   Define uma classe para o jogador 
 //
 **********************************************************************************/
@@ -18,7 +14,7 @@
 #include "Types.h"                      // tipos específicos da engine
 #include "Object.h"                     // interface de Object
 #include "Animation.h"                  // animação de sprites
-#include "Vector2.h"
+#include "Vector2.h"    //vetor de direção
 // ------------------------------------------------------------------------------
 
 #include "Timer.h"

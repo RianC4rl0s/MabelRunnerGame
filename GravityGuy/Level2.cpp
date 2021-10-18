@@ -1,10 +1,6 @@
 /**********************************************************************************
 // Level2 (Código Fonte)
 //
-// Criação:     27 Set 2021
-// Atualização: 27 Set 2021
-// Compilador:  Visual C++ 2019
-//
 // Descrição:   Nível 2 do jogo
 //
 **********************************************************************************/
@@ -17,6 +13,7 @@
 #include "Platform.h"
 #include "Background.h"
 
+#include "Winner.h"
 #include <string>
 #include <fstream>
 #include "Thorn.h"
@@ -94,7 +91,7 @@ void Level2::Init()
 	Food* food;
 
 
-	fin.open("Level1Food.txt");
+	fin.open("Level2Food.txt");
 	fin >> posX;
 
 	while (!fin.eof())
@@ -156,7 +153,7 @@ void Level2::Init()
 	fin.close();
 
 
-	Decoration* decoration = new Decoration(18500, 380, FINISH_LINE, dark, .56f);
+	Decoration* decoration = new Decoration(20500, 380, FINISH_LINE, dark, .56f);
 	scene->Add(decoration, STATIC);
 
 
@@ -175,7 +172,7 @@ void Level2::Update()
 		}
 		Mabel::totalScore += Mabel::player->score;
 		Mabel::audio->Stop(MUSIC);
-		Mabel::NextLevel<Home>();
+		Mabel::NextLevel<Winner>();
 		Mabel::player->Reset();
 	}
 	/*else if (Mabel::player->Bottom() < 0 || Mabel::player->Top() > window->Height())
@@ -218,7 +215,7 @@ void Level2::Draw()
 	text << "Score: " << Mabel::player->score;
 
 	int length = int(text.tellp());
-	gameFont->Draw(window->Width() - (30.0f * length), 70.0f, text.str(), Color(1, 1, 1, 1));
+	gameFont->Draw(window->Width() - (16.0f * length) - 50.0f, 70.0f, text.str(), Color(1, 1, 1, 1));
 	gameFont->Draw(window->Width() - 200.0f, 35.0f, "Level 2/2", Color(1, 1, 1, 1));
 
 

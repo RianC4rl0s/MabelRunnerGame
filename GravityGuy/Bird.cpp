@@ -1,7 +1,7 @@
 #include "Bird.h"
 
 Bird::Bird(float posX, float posY, Color tint) : color(tint) {
-	bird = new TileSet("Resources/bird.png",72,72,4,4);
+	bird = new TileSet("Resources/bird.png",96,96,4,4);
 	anim = new Animation(bird, 0.1f, true);
 
 
